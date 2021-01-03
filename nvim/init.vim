@@ -56,6 +56,7 @@ Plug 'tpope/vim-commentary'
 " mattua mod
 Plug 'wadackel/vim-dogrun'
 Plug 'arzg/vim-colors-xcode'
+Plug 'dracula/vim'
 
 " lsp & navigation
 Plug 'neovim/nvim-lspconfig'
@@ -80,7 +81,8 @@ set background=dark
 " colorscheme monokai-pro
 let g:gruvbox_invert_selection='0'
 " colorscheme gruvbox
-colorscheme xcodedarkhc  
+" colorscheme xcodedarkhc  
+ colorscheme dracula  
 
 " -----------------------------------------------------------------------------
 " lightline
@@ -89,7 +91,7 @@ colorscheme xcodedarkhc
 " configure lightline
 " \ 'colorscheme': 'monokaipro',
 let g:lightline = {
-  \ 'colorscheme': 'xcodedarkhc',
+  \ 'colorscheme': 'darcula',
   \ 'active': {
   \   'left': [ [ 'mode' ], 
   \             [ 'readonly', 'filename', 'modified' ] ],
