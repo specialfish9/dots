@@ -2,7 +2,7 @@
 
 __For Apple MacBook 2,1 (late 2006)__
 
-_Used on Parrot OS_
+_Used with Parrot OS_
 
 ### Items:
 
@@ -12,7 +12,7 @@ _Used on Parrot OS_
 4. neovim
 5. fonts
 
-### Screen:
+### Screenshots:
 
 <img src="./screen/one.png" />
 
