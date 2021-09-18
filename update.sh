@@ -8,3 +8,5 @@ echo "nvim"
 cp -r ../.config/nvim/init.vim ./nvim/
 echo "fonts"
 cp -r $HOME/.fonts .
+echo "picom"
+cp -r ../.config/picom/ .
