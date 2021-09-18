@@ -1,28 +1,14 @@
 #
 # wm independent hotkeys
-# brightness
-XF86MonBrightnessUp
-  xbacklight -inc 10
-
-XF86MonBrightnessDown
-  xbacklight -dec 10
-
-# languages
-ctrl + {u,i}
- setxkbmap {us,it}
-
+#
 
 # terminal emulator
 super + Return
-  alacritty
+	urxvt
+
 # program launcher
-super + space
-  dmenu_run -b -sf "#eba834" 
-
-# make sxhkd reload its configuration files:
-
-super + ctrl + Return
-   nautilus 
+super + @space
+	dmenu_run
 
 # make sxhkd reload its configuration files:
 super + Escape

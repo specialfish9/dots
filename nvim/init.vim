@@ -45,8 +45,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g
 
 call plug#begin()
 Plug 'ryanoasis/vim-devicons'
-" Plug 'lucat1/monokai-pro.vim'
-Plug 'gruvbox-community/gruvbox'
 
 " essentials (status line, commenter, zen mode)
 Plug 'itchyny/lightline.vim'
@@ -57,13 +55,12 @@ Plug 'tpope/vim-commentary'
 Plug 'wadackel/vim-dogrun'
 Plug 'arzg/vim-colors-xcode'
 Plug 'dracula/vim'
-
 " lsp & navigation
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " languages
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -77,12 +74,7 @@ if exists("syntax_on")
  syntax reset 
 endif
 set termguicolors
-set background=dark
-" colorscheme monokai-pro
-let g:gruvbox_invert_selection='0'
-" colorscheme gruvbox
-" colorscheme xcodedarkhc  
- colorscheme dracula  
+colorscheme dracula
 
 " -----------------------------------------------------------------------------
 " lightline
@@ -118,11 +110,12 @@ endfunction
 lua << EOF
   local lspconfig = require('lspconfig')
   
-  local on_attach = function()
-    require'completion'.on_attach()
+  local on_attach = function(client, buffer)
+    require'completion'.on_attach(client, buffer)
+    require'lsp_signature'.on_attach()
   end
 
-  local servers = {'gopls', 'clangd'}
+  local servers = {'dartls', 'clangd', 'jdtls'}
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
       on_attach = on_attach,
@@ -130,7 +123,7 @@ lua << EOF
   end
 EOF
 
-au BufWritePre *.h,*.hpp,*.c,*.cpp,*.go lua vim.lsp.buf.formatting_sync(nil, 1000)
+au BufWritePre *.h,*.hpp,*.c,*.cpp,*.go,*.dart,*.java lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " autocomplete settings
 set completeopt=menuone,noinsert,noselect
@@ -143,10 +136,6 @@ call sign_define("LspDiagnosticsErrorSign", {"text" : ""})
 call sign_define("LspDiagnosticsWarningSign", {"text" : ""})
 call sign_define("LspDiagnosticsInformationSign", {"text" : "כֿ",})
 call sign_define("LspDiagnosticsHintSign", {"text" : "כֿ",})
-
-" quick fzf config
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-let $FZF_DEFAULT_OPTS='--reverse'
 
 " -----------------------------------------------------------------------------
 " binds
@@ -164,8 +153,8 @@ noremap <leader>K :resize +5<CR>
 noremap <leader>L :vertical resize -5<CR>
 
 " other bindings
-nnoremap <leader>p :GFiles --cached --others --exclude-standard<CR>
-nnoremap <leader>f :Rg<space>
+nnoremap <leader>p <CMD>Telescope find_files<CR>
+nnoremap <leader>f <CMD>Telescope live_grep<space><CR>
 nnoremap <leader>g :Goyo<CR>
 
 " <c-space> to trigger completion.
@@ -206,3 +195,7 @@ endfunction
 autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
 
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
