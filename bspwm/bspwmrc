@@ -31,5 +31,5 @@ bspc config top_padding 40
 bspc config bottom_padding 10
 
 bspc monitor -d I II III IV V
-bspc monitor HDMI-1  -d IV V VI 
+bspc monitor HDMI-2  -d VI VII VIII IX 
 

@@ -6,6 +6,8 @@ echo "polybar"
 cp -r ../.config/polybar/ .
 echo "nvim"
 cp -r ../.config/nvim/init.vim ./nvim/
+echo "visimp"
+cp -r ../.config/nvim/init.lua ./visimp/
 echo "fonts"
 cp -r $HOME/.fonts .
 echo "picom"

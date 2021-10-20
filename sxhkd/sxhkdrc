@@ -18,6 +18,8 @@ ctrl + {u,i}
 # terminal emulator
 super + Return
   alacritty
+super + ctrl + s
+  gnome-screenshot -a
 
 # program launcher
 super + space
