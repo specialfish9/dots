@@ -5,7 +5,7 @@ require'visimp'{
     foldmethod = 'marker'
   },
   languages = {
-   'c', 'python', 'latex', 'dart'
+   'c', 'python', 'latex', 'dart', 'ocaml'
   },
   python = {
     lsp = 'pyright' -- Avoid installing pyright, use the system's default
@@ -13,7 +13,7 @@ require'visimp'{
  latex = {
    tectonic = true
  },
-  theme = {'dracula/vim', 'dracula', 'dark'}
+  theme = {'bluz71/vim-nightfly-guicolors', 'nightfly', 'dark'}
 }
 
 vim.cmd('command! Wq wq')
