@@ -12,3 +12,5 @@ echo "fonts"
 cp -r $HOME/.fonts .
 echo "picom"
 cp -r ../.config/picom/ .
+echo "kitty"
+cp -r ../.config/kitty/*.conf ./kitty/

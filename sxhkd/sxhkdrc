@@ -17,7 +17,8 @@ ctrl + {u,i}
 
 # terminal emulator
 super + Return
-  alacritty
+  kitty
+
 super + ctrl + s
   gnome-screenshot -a
 
