@@ -14,3 +14,4 @@ echo "picom"
 cp -r ../.config/picom/ .
 echo "kitty"
 cp -r ../.config/kitty/*.conf ./kitty/
+cat ../.config/kitty/theme.conf > ./kitty/theme.conf
