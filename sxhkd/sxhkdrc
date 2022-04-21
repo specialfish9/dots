@@ -1,4 +1,4 @@
-#
+
 # wm independent hotkeys
 # brightness
 XF86MonBrightness{Up,Down}
@@ -10,7 +10,7 @@ XF86Audio{Raise,Lower}Volume
 
 XF86AudioMute
   amixer set Master 0%
-
+#
 # languages
 ctrl + {u,i}
  setxkbmap {us,it}
@@ -19,8 +19,8 @@ ctrl + {u,i}
 super + Return
   kitty
 
-super + ctrl + s
-  gnome-screenshot -a
+super + shift + Return
+  scrot -scapture -e 'mv $f ~/Pictures/$f'
 
 # program launcher
 super + space

@@ -1,7 +1,7 @@
 #! /bin/sh
 sleep 1
 pgrep -x sxhkd > /dev/null || sxhkd &
-##pgrep -x picom > /dev/null || picom -c &
+pgrep -x picom > /dev/null || picom -c &
 
 # Bar
 sh $HOME/.config/polybar/start.sh
@@ -21,14 +21,12 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
+# idk
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
-bspc config top_padding 40
-bspc config bottom_padding 10
+bspc config top_padding 30
+bspc config bottom_padding 0
 
 bspc monitor -d I II III IV V
 bspc monitor HDMI-2  -d VI VII VIII IX 

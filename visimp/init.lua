@@ -1,11 +1,9 @@
-vim.lsp.set_log_level("debug")
-
 require'visimp'{
   defaults = {
     foldmethod = 'marker'
   },
   languages = {
-   'c', 'python', 'latex', 'dart', 'ocaml'
+   'c', 'python', 'latex', 'dart', 'ocaml', 'java', 'go'
   },
   python = {
     lsp = 'pyright' -- Avoid installing pyright, use the system's default
