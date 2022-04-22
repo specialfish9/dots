@@ -10,3 +10,8 @@
 6. Nvim
 
 Made on Arch Linux
+
+## Screenshots
+
+<img src="screenshots/s1.png" />
+<img src="screenshots/s2.png" />
