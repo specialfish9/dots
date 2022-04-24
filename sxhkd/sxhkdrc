@@ -24,7 +24,8 @@ super + shift + Return
 
 # program launcher
 super + space
-  dmenu_run -b -sf "#eba834" 
+  sh $HOME/.config/rofi/launcher.sh
+  # dmenu_run -b -sf "#eba834" 
 
 # make sxhkd reload its configuration files:
 
