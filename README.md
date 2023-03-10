@@ -1,17 +1,18 @@
-# dots
+# Dot files for my Lenovo Thinkpad T460
 
-My personal dot-files!
+## What's inside?
 
-## Branches:
+1. Sway 
+2. Hyprland
+3. Waybar
+4. Foot
+5. Wofi
+6. Fonts
+7. Nvim
 
-1. __arch:__ Main Arch Linux setup. Made mainly for 15.6" laptops.
-2. __ubuntu:__ Main Ubuntu setup. Made mainly for 15.6" laptops.
-3. __mac-void:__ Void Linux setup for my old MacBook late 2006 (13").
-4. __mac-parrot:__ Parrot OS setup for my old MacBook late 2006 (13").
-5. __tp-arch:__ Arch Linux setup for my Lenovo Thinkpad t460 (14") usign Xorg.
-6. __tp-arch-wayland:__ Arch Linux setup for my Lenovo Thinkpad t460 (14") using Wayland.
-7. __tp-win:__ Fork of tp-arch windows xp edition!!!
+Made on Arch Linux
 
-Please consider that each setup could be based on another and lot of them could not
-be updated.
+## Screenshots 
 
+<img src="screenshots/s1a.png" />
+<img src="screenshots/s2a.png" />

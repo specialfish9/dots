@@ -1,0 +1,11 @@
+[Unit]
+Description=Lock the screen on resume from suspend (ly)
+
+[Service]
+User=mattia
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=WAYLAND_DISPLAY=wayland-0
+ExecStart=/sbin/ly
+
+[Install]
+WantedBy=suspend.target

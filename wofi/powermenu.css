@@ -1,0 +1,31 @@
+window {
+  background-color: #222;
+  color: white;
+  border-radius: 20px;
+}
+
+#input {
+  margin: 20px;
+  border: 2px solid #f8bd96;
+  background-color: #222222; 
+  color: white;
+}
+
+#inner-box {
+  margin: 20px;
+  background-color: #222;
+  color: white;
+}
+
+#entry {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+#entry:selected{
+  background-color: #f57c00;
+}
+
+#img {
+  margin-right: 5px;
+}
