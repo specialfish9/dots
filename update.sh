@@ -10,4 +10,5 @@ echo "wofi"
 cp -r $HOME/.config/wofi/ .
 echo "hyprland"
 cp -r $HOME/.config/hypr/ .
-
+echo "zsh"
+cp $HOME/.oh-my-zsh/themes/mytheme zsh

@@ -1,0 +1,7 @@
+local BLUE="%{$fg_bold[blue]%}"
+local CYAN="%{$fg[cyan]%}"
+local GREEN="%{$fg_bold[green]%}"
+local MAGENTA="%{$fg_bold[magenta]%}"
+local YELLOW="%{$fg_bold[yellow]%}"
+local RESET="%{$reset_color%}"
+PROMPT="${GREEN}%n${RESET}${CYAN} at ${RESET}${BLUE}%m${RESET} ${CYAN}in${RESET} ${YELLOW}%~${RESET} [${MAGENTA}\$(git_current_branch)${RESET}] "

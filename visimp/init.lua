@@ -28,7 +28,6 @@ require'visimp'{
   icons = {},
 
   nvimtree = {
-    icons = true,
     sort_by = "case_sensitive",
     view = {
       width = 30,
