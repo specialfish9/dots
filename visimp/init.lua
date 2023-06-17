@@ -26,6 +26,9 @@ require'visimp'{
   snippet = {},
   outline = {},
   icons = {},
+  lspformat = {
+    --exclude = {'ocamllsp'}
+  },
 
   nvimtree = {
     sort_by = "case_sensitive",
