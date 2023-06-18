@@ -30,6 +30,12 @@ require'visimp'{
     --exclude = {'ocamllsp'}
   },
 
+  statusline = {
+    tabline = {
+      lualine_a = { 'buffers' }
+    }
+  },
+
   nvimtree = {
     sort_by = "case_sensitive",
     view = {
@@ -46,7 +52,13 @@ require'visimp'{
     filters = {
       dotfiles = true,
     }
-  }
+  },
+  binds = {
+    [{ mode = 'n', bind = '<C-P>' }] = ':bprev<cr>',
+    [{ mode = 'n', bind = '<C-N>' }] = ':bnext<cr>',
+    [{ mode = 'n', bind = '<C-T>' }] = ':NvimTreeToggle<cr>',
+    [{ mode = 'n', bind = '<C-Q>' }] = ':quit<cr>'
+  },
 }
 
 vim.cmd('command! T NvimTreeToggle')
