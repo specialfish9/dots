@@ -1,6 +1,6 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher", "wlr/workspaces" ],
+	"modules-left": ["custom/launcher", "wlr/workspaces", "custom/waybar-media" ],
 	"modules-center": ["clock"],
 	"modules-right": [ "battery","network", "cpu","memory","custom/media","tray", "custom/updates","backlight","pulseaudio"] ,
 	
@@ -25,6 +25,15 @@
       "default": "",
     },
   },
+
+  "custom/waybar-media": {
+        "return-type": "json",
+        "exec": "waybar-media.py status",
+        "on-click": "waybar-media.py playpause",
+        "on-scroll-up": "waybar-media.py previous",
+        "on-scroll-down": "waybar-media.py next",
+        "escape": true
+    },
 
 	"network": {
 		"tooltip": false,

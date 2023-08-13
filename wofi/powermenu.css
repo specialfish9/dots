@@ -1,19 +1,19 @@
 window {
-  background-color: #222;
+  background-color: #2d2329;
   color: white;
   border-radius: 20px;
 }
 
 #input {
   margin: 20px;
-  border: 2px solid #f8bd96;
+  border: 2px solid #bd93f9;
   background-color: #222222; 
   color: white;
 }
 
 #inner-box {
   margin: 20px;
-  background-color: #222;
+  background-color: #2d2329;
   color: white;
 }
 
@@ -23,7 +23,8 @@ window {
 }
 
 #entry:selected{
-  background-color: #f57c00;
+  background-color: #ad83c9;
+  border-radius: 4px;
 }
 
 #img {

@@ -205,12 +205,53 @@ window#waybar.hidden {
 	background: #E8A2AF;
 }
 
-#custom-media {
+#custom-waybar-media {
 	margin-left: 10px;
 	padding-left: 17px;
-	padding-right: 17px;
 	margin-bottom: 0px;
+	padding-right: 17px;
 	transition: none;
-	color: #161320;
-	background: #F2CDCD;
+	background: #161320;
+	color: #6df4f5;
+}
+
+#custom-waybar-media.paused {
+	margin-left: 10px;
+	padding-left: 17px;
+	margin-bottom: 0px;
+	padding-right: 17px;
+	transition: none;
+	background: #161320;
+	color: #3df4a5;
+}
+
+#custom-waybar-media.paused {
+	margin-left: 10px;
+	padding-left: 17px;
+	margin-bottom: 0px;
+	padding-right: 17px;
+	transition: none;
+	background: #161320;
+	color: #3df4a5;
+}
+
+#custom-waybar-media.playing {
+	margin-left: 10px;
+	padding-left: 17px;
+	margin-bottom: 0px;
+	padding-right: 17px;
+	transition: none;
+	background: #161320;
+	color: #3df4a5;
+  animation-name: music_play;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes music_play {
+    to {
+        background-color: #1e543c
+    }
 }

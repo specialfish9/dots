@@ -23,7 +23,8 @@ window {
 }
 
 #entry:selected{
-  background-color: #f57c00;
+  background-color: #c87d36;
+  border-radius: 4px;
 }
 
 #img {
