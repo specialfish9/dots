@@ -3,7 +3,7 @@ require'visimp'{
     foldmethod = 'marker'
   },
   languages = {
-   'c', 'python', 'latex', 'dart', 'java', 'go', 'javascript', 'vue', 'ocaml'
+   'c', 'python', 'latex', 'java', 'go', 'javascript', 'vue', 'ocaml', 'dart'
   },
   python = {
     lsp = 'pyright' -- Avoid installing pyright, use the system's default

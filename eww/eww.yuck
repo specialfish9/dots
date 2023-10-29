@@ -1,0 +1,267 @@
+;; Clock ********************************************************************** 
+(defpoll HOUR :interval "5s" `date +\"%I\"`)
+(defpoll MIN :interval "5s" `date +\"%M\"`)
+(defpoll MER :interval "5s" `date +\"%p\"`)
+(defpoll DAY :interval "5s" `date +\"%A\"`)
+
+(defwidget clock [] 
+	(box :class "genwin" :orientation "h" :spacing 50 :space-evenly false :vexpand "false" :hexpand "false" 
+		(box :orientation "h" :spacing 0
+			(label :class "time_hour" :valign "start" :wrap "true" :limit-width 25 :text HOUR)
+			(label :class "time_min" :valign "end" :wrap "true" :limit-width 25 :text MIN))
+		(box :orientation "v" :spacing 0 
+			(label :class "time_mer" :valign "start" :halign "end" :wrap "true" :limit-width 25 :text MER)
+			(label :class "time_day" :valign "end" :halign "end" :wrap "true" :limit-width 25 :text DAY))))
+
+(defwindow clock 
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "12%"
+                               :width "20%"
+                               :height "5%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(clock))
+
+;; Splash ********************************************************************** 
+(defpoll SPLASH :interval "5min" `hyprctl splash`)
+
+(defwidget splash [] 
+	(box 
+    :class "genwin" 
+		(box 
+			(label 
+        :class "splash" 
+        :wrap "true" 
+        :text SPLASH))))
+
+(defwindow splash
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "22%"
+                               :width "20%"
+                               :height "10%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(splash))
+
+;; Uptime ********************************************************************** 
+(defpoll UPHOUR :interval "5s" `uptime -p | awk '{print $2 \" \" $3}' | sed 's/,//g'`)
+(defpoll UPMIN :interval "5s" `uptime -p | awk '{print $4 \" \" $5}'`)
+
+(defwidget uptime [] 
+	(box 
+    :class "genwin" 
+		(box 
+      :orientation "v" 
+      :halign "center" 
+      :spacing 10 
+      :space-evenly "false" 
+      :vexpand "false" 
+      :hexpand "false" 
+			(label :class "icontimer" :valign "center" :text "祥")
+			(box :orientation "v" :valign "center" :spacing 0 :space-evenly "false" :vexpand "false" :hexpand "false" 
+				(label :class "uphour" :halign "start" :wrap "true" :limit-width 25 :text UPHOUR)
+				(label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
+
+(defwindow uptime
+           :monitor 0
+           :geometry (geometry :x "12%"
+                               :y "33%"
+                               :width "9%"
+                               :height "20%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(uptime))
+
+;; User ********************************************************************** 
+;; Profile vars
+(defvar IMAGE "images/profile.png")
+(defvar NAME "Mattia Girolimetto")
+(defpoll UNAME :interval "5m" `whoami`)
+
+(defwidget user [] 
+	(box 
+    :class "genwin" 
+    :orientation "v" 
+    :space-evenly "false" 
+    :vexpand "false" 
+    :hexpand "false"
+		(box 
+      :style "background-image: url('${IMAGE}');" 
+      :class "face" 
+      :halign "center")
+		(label 
+      :class "fullname" 
+      :halign "center" 
+      :wrap "true" 
+      :limit-width 25 
+      :text UNAME)
+		))
+
+(defwindow user 
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "33%"
+                               :width "10%"
+                               :height "20%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(user))
+
+
+;; System ********************************************************************** 
+(defpoll HOST :interval "5s" `hostname`)
+(defpoll CPU_USAGE :interval "1s" `scripts/sys_info --cpu`)
+(defpoll MEM_USAGE :interval "1s" `scripts/sys_info --mem`)
+(defpoll BATTERY :interval "5s" `scripts/sys_info --bat`)
+
+(defwidget system [] 
+	(box :class "genwin" :vexpand "false" :hexpand "false" 
+		(box :orientation "v" :spacing 35 :halign "center" :valign "center" :space-evenly "false" :vexpand "false" :hexpand "false" 
+			(box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false" 
+				(label :class "iconcpu" :text "")
+				(scale :min 0 :max 100 :value CPU_USAGE :active "false"))
+			(box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false" 
+				(label :class "iconmem" :text "")
+				(scale :min 0 :max 100 :value MEM_USAGE :active "false"))
+			(box :class "bat_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false" 
+				(label :class "iconbat" :text "")
+				(scale :min 0 :max 100 :value BATTERY :active "false")))))
+
+(defwindow system
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "54%"
+                               :width "20%"
+                               :height "18%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(system))
+
+;; Hdd ********************************************************************** 
+(defpoll FREE :interval "5s" `df -h / | awk '{print $4}' | tail -n 1 | sed 's/G/GB/'`)
+
+(defwidget hdd [] 
+	(box 
+    :class "genwin" 
+    :space-evenly "false" 
+    :vexpand "false" 
+    :hexpand "false" 
+		(box 
+      :class "hddbox" 
+      :orientation "v" 
+      :space-evenly "false" 
+      :vexpand "false" 
+      :hexpand "false" 
+			(button 
+        :class "hddicon" 
+        :onclick "scripts/open_apps --fm" 
+        "")
+				(label 
+          :class "hdd_label" 
+          :wrap "true" 
+          :limit-width 25 
+          :text FREE
+      ))))
+
+(defwindow hdd
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "73%"
+                               :width "8%"
+                               :height "8%"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore: false
+(hdd))
+
+
+
+;; Escape ********************************************************************** 
+(defwidget logout [] 
+	(box :class "genwin" :vexpand "false" :hexpand "false" 
+		(button :class "btn_logout" :onclick "openbox --exit" "")))
+
+(defwidget sleep [] 
+	(box :class "genwin" :vexpand "false" :hexpand "false" 
+		(button :class "btn_sleep" :onclick "systemctl suspend" "")))
+
+(defwidget reboot [] 
+	(box :class "genwin" :vexpand "false" :hexpand "false" 
+		(button :class "btn_reboot" :onclick "systemctl reboot" "")))
+
+(defwidget poweroff [] 
+	(box :class "genwin" :vexpand "false" :hexpand "false" 
+		(button :class "btn_poweroff" :onclick "systemctl poweroff" "")))
+
+;; sleep
+(defwindow sleep
+  :stacking "fg" 
+  :focusable "false" 
+  :monitor 0
+	:geometry 
+  (geometry 
+    :x "10%" 
+    :y "73%"
+    :width "5%" 
+    :height "7%"
+  )
+  :wm-ignore: false
+(sleep))
+
+;; logout 
+(defwindow logout
+  :stacking "fg" 
+  :focusable "false" 
+  :monitor 0
+	:geometry 
+  (geometry 
+    :x "16%" 
+    :y "73%"
+    :width "5%" 
+    :height "7%"
+  )
+  :wm-ignore: false
+(logout))
+
+;; reboot
+(defwindow reboot
+  :stacking "fg" 
+  :focusable "false" 
+  :monitor 0
+	:geometry 
+  (geometry 
+    :x "10%" 
+    :y "81%"
+    :width "5%" 
+    :height "7%"
+  )
+  :wm-ignore: false
+(reboot))
+
+;; poweroff
+(defwindow poweroff
+  :stacking "fg" 
+  :focusable "false" 
+  :monitor 0
+	:geometry 
+  (geometry 
+    :x "16%" 
+    :y "81%"
+    :width "5%" 
+    :height "7%"
+  )
+  :wm-ignore: false
+(poweroff))

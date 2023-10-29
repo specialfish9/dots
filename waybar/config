@@ -1,6 +1,6 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher", "wlr/workspaces", "custom/waybar-media" ],
+	"modules-left": ["custom/launcher", "hyprland/workspaces", "custom/waybar-media" ],
 	"modules-center": ["clock"],
 	"modules-right": [ "battery","network", "cpu","memory","custom/media","tray", "custom/updates","backlight","pulseaudio"] ,
 	
@@ -15,7 +15,7 @@
 		}
 	},
 
-  "wlr/workspaces": {
+  "hyprland/workspaces": {
     "format": "{name}:{icon}",
     "on-click": "activate",
     "all-outputs": false,

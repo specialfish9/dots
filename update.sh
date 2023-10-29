@@ -12,3 +12,5 @@ echo "hyprland"
 cp -r $HOME/.config/hypr/ .
 echo "zsh"
 cp $HOME/.oh-my-zsh/themes/mytheme.zsh-theme zsh
+echo "eww"
+cp -r $HOME/.config/eww .
