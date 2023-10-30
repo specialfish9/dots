@@ -20,7 +20,7 @@
                                :width "20%"
                                :height "5%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (clock))
@@ -44,7 +44,7 @@
                                :width "20%"
                                :height "10%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (splash))
@@ -75,7 +75,7 @@
                                :width "9%"
                                :height "20%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (uptime))
@@ -112,7 +112,7 @@
                                :width "10%"
                                :height "20%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (user))
@@ -144,7 +144,7 @@
                                :width "20%"
                                :height "18%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (system))
@@ -182,7 +182,7 @@
                                :width "8%"
                                :height "8%"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "dock"
            :wm-ignore: false
 (hdd))
@@ -208,7 +208,7 @@
 
 ;; sleep
 (defwindow sleep
-  :stacking "fg" 
+  :stacking "bg" 
   :focusable "false" 
   :monitor 0
 	:geometry 
@@ -223,7 +223,7 @@
 
 ;; logout 
 (defwindow logout
-  :stacking "fg" 
+  :stacking "bg" 
   :focusable "false" 
   :monitor 0
 	:geometry 
@@ -238,7 +238,7 @@
 
 ;; reboot
 (defwindow reboot
-  :stacking "fg" 
+  :stacking "bg" 
   :focusable "false" 
   :monitor 0
 	:geometry 
@@ -253,7 +253,7 @@
 
 ;; poweroff
 (defwindow poweroff
-  :stacking "fg" 
+  :stacking "bg" 
   :focusable "false" 
   :monitor 0
 	:geometry 
