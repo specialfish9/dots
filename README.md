@@ -1,4 +1,4 @@
-# Dot files for my Lenovo Thinkpad T460
+# Dot files for my Lenovo Thinkpad T14 gen 3
 
 ## What's inside?
 
@@ -9,10 +9,8 @@
 5. Wofi
 6. Fonts
 7. Nvim (visimp <3)
-8. eww
-9. zsh
-
-Made on Arch Linux
+8. Eww
+9. Zsh
 
 ## Screenshots 
 
