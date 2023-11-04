@@ -10,12 +10,11 @@ close_eww() {
 ## Options #############################################
 if  [[ $1 = "--lock" ]]; then
 	close_eww
-    betterlockscreen --lock
+    systemctl --user start lock
 
 elif  [[ $1 = "--logout" ]]; then
 	close_eww
-    #openbox --exit
-    berryc quit
+   killall Hyprland # TODO: find a way to logout 
 
 elif  [[ $1 = "--suspend" ]]; then
 	close_eww
@@ -24,11 +23,11 @@ elif  [[ $1 = "--suspend" ]]; then
 
 elif  [[ $1 = "--reboot" ]]; then
 	close_eww
-    systemctl reboot
+    reboot
 
 elif  [[ $1 = "--shutdown" ]]; then
 	close_eww
-    systemctl poweroff
+    poweroff
 
 ## Help Menu #############################################
 else
