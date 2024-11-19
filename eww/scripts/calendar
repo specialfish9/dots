@@ -3,9 +3,9 @@ import caldav
 import pytz
 from datetime import datetime, timedelta
 
-caldav_url = "http://calendar.teapot.ovh"
-username = "mattia"
-password = "QAFPtMcT8zd1VDWWslhvH7xPWMPgCQz7"
+caldav_url = "" # caldav server url
+username = "" 
+password = ""
 target_cal_names = ["uni", "life sucks"]
 
 def extract_events(principal, cal_name):
