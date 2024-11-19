@@ -13,15 +13,16 @@ fi
 run_eww() {
 	${EWW} --config "$CFG" open-many \
    clock  \
-   splash \
-   system \
-   hdd \
-   uptime \
-   user \
-   logout \
-   sleep \
-   reboot \
-   poweroff 
+   calendar
+   # splash \
+   # system \
+   # hdd \
+   # uptime \
+   # user \
+   # logout \
+   # sleep \
+   # reboot \
+   # poweroff \
 }
 
 ## Launch or close widgets accordingly

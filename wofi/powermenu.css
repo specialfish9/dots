@@ -1,7 +1,7 @@
 window {
   background-color: #2d2329;
   color: white;
-  border-radius: 20px;
+  border: 2px solid #bd93f9;
 }
 
 #input {
@@ -18,12 +18,14 @@ window {
 }
 
 #entry {
-  margin-bottom: 10px;
   font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #entry:selected{
-  background-color: #ad83c9;
+  border: 2px solid #bd93f9;
+  background-color: transparent;
   border-radius: 4px;
 }
 

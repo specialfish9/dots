@@ -1,7 +1,9 @@
 window {
   background-color: #222;
   color: white;
-  border-radius: 20px 20px 0px 0px;
+  /* border-radius: 20px; */
+  border: 2px solid #f8bd96;
+  padding: 10px;
 }
 
 #input {
@@ -18,13 +20,17 @@ window {
 }
 
 #entry {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   font-size: 15px;
 }
 
 #entry:selected{
-  background-color: #c87d36;
+  border: 2px solid #f8bd96;
+   background-color: transparent;
   border-radius: 4px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 #img {

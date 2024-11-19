@@ -17,7 +17,7 @@
            :monitor 0
            :geometry (geometry :x "1%"
                                :y "12%"
-                               :width "20%"
+                               :width "23%"
                                :height "5%"
                                :anchor "top left")
            :stacking "bg"
@@ -265,3 +265,50 @@
   )
   :wm-ignore: false
 (poweroff))
+
+;; TODO ********************************************************************** 
+(defpoll TODO_LIST :interval "5s" `scripts/todo`)
+
+(defwidget todo[] 
+	(box 
+    :class "genwin" 
+		(box 
+			(label 
+        :class "todo" 
+        :wrap "true" 
+        :text TODO_LIST))))
+
+(defwindow todo 
+           :monitor 0
+           :geometry (geometry :x "80%"
+                               :y "58%"
+                               :width "18%"
+                               :height "30%"
+                               :anchor "top left")
+           :stacking "bg"
+           :windowtype "dock"
+           :wm-ignore: false
+(todo))
+
+;; Calendar ********************************************************************** 
+(defpoll CALENDAR :interval "5m" `scripts/calendar`)
+
+(defwidget calendar2 [] 
+	(box 
+    :class "genwin" 
+		(box 
+			(label 
+        :class "calendar" 
+        :text CALENDAR))))
+
+(defwindow calendar
+           :monitor 0
+           :geometry (geometry :x "1%"
+                               :y "23%"
+                               :width "23%"
+                               ;;:height "30%"
+                               :anchor "top left")
+           :stacking "bg"
+           :windowtype "dock"
+           :wm-ignore: false
+(calendar2))
