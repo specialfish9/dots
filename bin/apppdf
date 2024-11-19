@@ -1,0 +1,3 @@
+#!/bin/bash
+
+evince $HOME/.nb/$1/$1.pdf &

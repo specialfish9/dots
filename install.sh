@@ -14,4 +14,5 @@ echo "wofi"
 cp -r wofi $HOME/.config/
 echo "hyprland"
 cp -r hypr $HOME/.config/
-
+echo "bin"
+cp -r bin $HOME/bin/

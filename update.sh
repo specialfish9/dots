@@ -14,3 +14,5 @@ echo "zsh"
 cp $HOME/.oh-my-zsh/themes/mytheme.zsh-theme zsh
 echo "eww"
 cp -r $HOME/.config/eww .
+echo "bin"
+cp -r $HOME/bin .

@@ -1,0 +1,90 @@
+#!/sbin/python3
+import caldav
+import pytz
+from datetime import datetime, timedelta
+
+caldav_url = "http://calendar.teapot.ovh"
+username = "mattia"
+password = "QAFPtMcT8zd1VDWWslhvH7xPWMPgCQz7"
+target_cal_names = ["uni", "life sucks"]
+
+def extract_events(principal, cal_name):
+    today = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+    tomorrow = today + timedelta(days=2)
+
+    calendar = principal.calendar(name=cal_name)
+
+    return calendar.date_search(start=today, end=tomorrow)
+
+def print_cal(caldav_url, username, password, cal_names):
+    client = caldav.DAVClient(url=caldav_url, username=username, password=password)
+    principal = client.principal()
+
+    events = []
+
+    for cal_name in cal_names:
+      for e in extract_events(principal, cal_name):
+        events.append(e)
+
+    #events.sort(key=lambda x: x.vobject_instance.vevent.dtstart.value)
+
+    today = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+    tomorrow = today + timedelta(days=1)
+
+    print("Today")
+
+    all_day = []
+    tomorrow_events = []
+    for evento in events:
+        start = evento.vobject_instance.vevent.dtstart.value
+        try:
+           end = evento.vobject_instance.vevent.dtend.value
+        except:
+           all_day.append(evento)
+           continue
+           
+        now = False
+        if start.timestamp() < datetime.now().timestamp() and end.timestamp() > datetime.now().timestamp():
+           now = True
+
+        if start.timestamp() > tomorrow.timestamp():
+          tomorrow_events.append(evento)
+          continue
+
+        print((">" if now else "║"), elips(evento.vobject_instance.vevent.summary.value, 30))
+        print((">" if now else "║"), date_to_str(start), "-", date_to_str(end))
+        print("")
+
+    if len(all_day) != 0:
+      print("All-day:")
+      for ad in all_day:
+         print("║", elips(ad.vobject_instance.vevent.summary.value, 30))
+
+    if len(tomorrow_events) != 0:
+      print("Tomorrow")
+      for ad in tomorrow_events:
+         print("║", elips(ad.vobject_instance.vevent.summary.value, 30))
+         start = ad.vobject_instance.vevent.dtstart.value
+         end = ""
+         try:
+            end = ad.vobject_instance.vevent.dtend.value
+         except:
+            print("║ All day")
+            continue
+         print("║", date_to_str(start), "-", date_to_str(end))
+         print("")
+
+def date_to_str(date: datetime):
+    datez = date.astimezone(pytz.timezone('Europe/Rome'))
+    return datez.strftime("%H:%M")
+
+def elips(s, x):
+   if len(s) > x:
+     s = s[:x] + "..."
+   return s
+
+def main():
+    print_cal(caldav_url, username, password, target_cal_names)
+
+if __name__ == "__main__":
+    main()
