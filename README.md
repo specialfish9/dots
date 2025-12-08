@@ -1,16 +1,29 @@
-# Dot files for my Lenovo Thinkpad T14 gen 3
+# Dot files
 
 ## What's inside?
 
-- Hyprland
-- Waybar
-- Foot
-- Wofi
-- Fonts
+- Dunst (Notifications)
+- Eww (Widgets)
+- Foot (Terminal)
+- Hyprland (Window manager)
+- Ly (Greater)
 - Nvim (visimp <3)
-- Eww
-- Tmux
+- Tmux (Terminal multiplexer)
+- Waybar (Bar)
+- Wofi (Menu)
 
-## Screenshots 
+## Install
 
-<img src="screens/one.png" />
+To run the installation script, you will need
+- go
+- make
+
+
+Once installed, change the `TARGET_DIR` variable on the `Makefile` and
+run:
+
+```bash
+make 
+```
+
+
