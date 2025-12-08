@@ -1,5 +1,6 @@
 SHADOW_PATH := ~/.local/bin/shadow
-CONFIG_DIR := .config # Path to your configuration directory
+CONFIG_DIR := ./home
+TARGET_DIR := ./test # Path to your configuration directory
 
 install: install-shadow copy
 .PHONY: install
@@ -10,7 +11,7 @@ install-shadow:
 .PHONY: install-shadow
 
 copy:
-	$(SHADOW_PATH) . $(CONFIG_DIR)
+	$(SHADOW_PATH) $(CONFIG_DIR) $(TARGET_DIR)
 .PHONY: copy
 
 uninstall: uninstall-shadow
