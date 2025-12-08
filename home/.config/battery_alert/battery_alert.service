@@ -1,0 +1,6 @@
+[Unit]
+Description=Battery alert service
+
+[Service]
+ExecStart=/bin/bash /home/mattia/.config/battery_alert/battery_alert
+

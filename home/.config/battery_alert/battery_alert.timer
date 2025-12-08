@@ -1,0 +1,10 @@
+[Unit]
+Description=Run battery alert periodically
+
+[Timer]
+OnUnitActiveSec=5min
+Unit=battery_alert.service
+
+[Install]
+WantedBy=timers.target
+

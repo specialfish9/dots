@@ -19,9 +19,15 @@ func parseArgs() (*args, error) {
 	if len(os.Args) < 3 {
 		return nil, errors.New("missing base path argument")
 	}
+	
+	absPath, err := filepath.Abs(os.Args[1])
+	if err != nil {
+		return nil, fmt.Errorf("invalid absolute path: %w", err)
+	}
+
 
 	return &args{
-		base:  os.Args[1],
+		base:  absPath,
 		out:   os.Args[2],
 		debug: os.Getenv("DEBUG") == "1",
 	}, nil
@@ -92,15 +98,18 @@ func replicate(out string, t *treeNode) error {
 
 		debug("Creating symlink at %s -> %s", symLinkPath, t.path)
 
+		// Remove symlink. Ignore errors. TODO add force flace
+		os.Remove(symLinkPath)
+
 		if err := os.Symlink(t.path, symLinkPath); err != nil {
-			return fmt.Errorf("creating symlink: %w")
+			return fmt.Errorf("creating symlink: %w", err)
 		}
 	} else {
 		dirPath := filepath.Join(out, t.name)
 
 		debug("Creating dir at %s -> %s", dirPath, t.path)
 
-		if err := os.Mkdir(dirPath, fs.ModePerm); err != nil {
+		if err := os.MkdirAll(dirPath, fs.ModePerm); err != nil {
 			return fmt.Errorf("replicating directory: %w", err)
 		}
 
@@ -151,6 +160,8 @@ func main() {
 	d = args.debug
 	debug("debug on")
 
+	debug("Reading folder: %s", args.base)
+
 	tree, err := mkTree(args.base, "")
 	if err != nil {
 		fmt.Println("Error creating tree:", err)
@@ -171,11 +182,4 @@ func main() {
 		fmt.Println("Error replicatig tree:", err)
 		os.Exit(1)
 	}
-
-	// path := "/tmp/rolfl/symexample"
-	// target := "symtarget.txt"
-	// os.MkdirAll(path, 0755)
-	// ioutil.WriteFile(filepath.Join(path, "symtarget.txt"), []byte("Hello\n"), 0644)
-	// symlink := filepath.Join(path, "symlink")
-	// os.Symlink(target, symlink)
 }
