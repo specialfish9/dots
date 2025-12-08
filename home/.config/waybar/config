@@ -1,5 +1,17 @@
 [
   {
+    "modules-center": [
+      "clock",
+      "battery",
+      "network",
+    ],
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "hyprland/language",
+      "tray"
+    ],
     "backlight": {
       "format": " {}%",
       "interval": 1,
@@ -83,20 +95,6 @@
       "interval": 30,
       "justify": "center"
     },
-    "modules-center": [
-      "clock",
-      "battery",
-      "network",
-      "backlight",
-      "pulseaudio"
-    ],
-    "modules-left": [
-      "hyprland/workspaces"
-    ],
-    "modules-right": [
-      "hyprland/language",
-      "tray"
-    ],
     "network": {
       "format-ethernet": "ETH",
       "format-icons": [

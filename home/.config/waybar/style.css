@@ -65,6 +65,7 @@ window#waybar.hidden {
 	color: #161320;
 	/*background: #FAE3B0;*/
 	background: #96CDFB;
+  border-radius: 0 20px 20px 0px;
 }
 
 #pulseaudio {
