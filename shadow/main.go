@@ -1,125 +1,50 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
-	"io/fs"
 	"os"
 	"path/filepath"
-	"strings"
 )
+
+const lockFile = "shadow.lock"
 
 type args struct {
 	base  string
 	out   string
+	clean bool
 	debug bool
 }
 
+// parseArgs parses args in a cumbersome, manual way. For now it works fairly
+// well, we have just a bunch of arguments.
 func parseArgs() (*args, error) {
+	if len(os.Args) == 2 {
+		if os.Args[1] != "clean" {
+			return nil, fmt.Errorf("invalid command '%s'", os.Args[1])
+		}
+
+		return &args{
+			debug: os.Getenv("DEBUG") == "1",
+			clean: true,
+		}, nil
+	}
+
 	if len(os.Args) < 3 {
 		return nil, errors.New("missing base path argument")
 	}
-	
+
 	absPath, err := filepath.Abs(os.Args[1])
 	if err != nil {
 		return nil, fmt.Errorf("invalid absolute path: %w", err)
 	}
-
 
 	return &args{
 		base:  absPath,
 		out:   os.Args[2],
 		debug: os.Getenv("DEBUG") == "1",
 	}, nil
-}
-
-type treeNode struct {
-	path     string
-	name     string
-	isFile   bool
-	children []*treeNode
-}
-
-func (t *treeNode) String() string {
-	return t.path + t.string(0)
-}
-
-func (t *treeNode) string(level int) string {
-	spacing := ""
-	for i := 0; i < level; i++ {
-		spacing += "  "
-	}
-	splitted := strings.Split(t.path, "/")
-	out := splitted[len(splitted)-1]
-	for _, c := range t.children {
-		out += "\n"
-		out += spacing
-		out += "|-"
-		out += c.string(level + 1)
-	}
-
-	return out
-}
-
-func mkTree(root string, name string) (*treeNode, error) {
-	entries, err := os.ReadDir(root)
-	if err != nil {
-		return nil, fmt.Errorf("reading directory %s: %w", root, err)
-	}
-
-	children := make([]*treeNode, len(entries))
-	for i, e := range entries {
-		if e.IsDir() {
-			children[i], err = mkTree(filepath.Join(root, e.Name()), e.Name())
-			if err != nil {
-				return nil, err
-			}
-		} else {
-			// Add file to tree
-			children[i] = &treeNode{
-				path:   filepath.Join(root, e.Name()),
-				name:   e.Name(),
-				isFile: true,
-			}
-		}
-	}
-
-	return &treeNode{
-		path:     root,
-		name:     name,
-		isFile:   false,
-		children: children,
-	}, nil
-}
-
-func replicate(out string, t *treeNode) error {
-	if t.isFile {
-		symLinkPath := filepath.Join(out, t.name)
-
-		debug("Creating symlink at %s -> %s", symLinkPath, t.path)
-
-		// Remove symlink. Ignore errors. TODO add force flace
-		os.Remove(symLinkPath)
-
-		if err := os.Symlink(t.path, symLinkPath); err != nil {
-			return fmt.Errorf("creating symlink: %w", err)
-		}
-	} else {
-		dirPath := filepath.Join(out, t.name)
-
-		debug("Creating dir at %s -> %s", dirPath, t.path)
-
-		if err := os.MkdirAll(dirPath, fs.ModePerm); err != nil {
-			return fmt.Errorf("replicating directory: %w", err)
-		}
-
-		for _, child := range t.children {
-			if err := replicate(dirPath, child); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
 }
 
 // createOutDir if not exitsts
@@ -149,17 +74,7 @@ func debug(format string, args ...any) {
 	}
 }
 
-func main() {
-	args, err := parseArgs()
-	if err != nil {
-		fmt.Println("Error parsing arguments:", err)
-		fmt.Println("Usage: shadow <base_path> <output_path>")
-		os.Exit(1)
-	}
-
-	d = args.debug
-	debug("debug on")
-
+func create(args *args) {
 	debug("Reading folder: %s", args.base)
 
 	tree, err := mkTree(args.base, "")
@@ -175,11 +90,72 @@ func main() {
 		os.Exit(1)
 	}
 
+	lock := newLock(lockFile)
+
 	for _, child := range tree.children {
-		err = errors.Join(err, replicate(args.out, child))
+		err = errors.Join(err, replicate(args.out, child, lock))
 	}
 	if err != nil {
 		fmt.Println("Error replicatig tree:", err)
 		os.Exit(1)
+	}
+
+	if err := lock.Write(); err != nil {
+		fmt.Println("Error writing lock file: ", err)
+		os.Exit(1)
+	}
+}
+
+func clean() error {
+	// Reconstruct lock
+	var lockEntries []lockEntry
+
+	// TODO: prompt "are u sure?"
+	fmt.Println("Warn! This will remove all the symlinks created by shadow!")
+
+	lockFileContent, err := os.ReadFile(lockFile)
+	if err != nil {
+		return fmt.Errorf("can't open lockfile: %w", err)
+	}
+
+	if err := json.Unmarshal(lockFileContent, &lockEntries); err != nil {
+		return fmt.Errorf("cant parse lock file: %w", err)
+	}
+
+	for _, entry := range lockEntries {
+		fmt.Printf("Cleaning %s (%s)\n", entry.Name, entry.Path)
+		err := os.Remove(entry.Path)
+		if err != nil {
+			// Log the error directly. Do not stop the process
+			fmt.Printf("Error cleaning %s: %v\n", entry.Name, err)
+		}
+	}
+
+	// Finally, generate a new lock file
+	if err = newLock(lockFile).Write(); err != nil {
+		return fmt.Errorf("cant update lockfile: %w", err)
+	}
+
+	return nil
+}
+
+func main() {
+	args, err := parseArgs()
+	if err != nil {
+		fmt.Println("Error parsing arguments:", err)
+		fmt.Println("Usage: shadow <base_path> <output_path>")
+		os.Exit(1)
+	}
+
+	d = args.debug
+	debug("debug on")
+
+	if args.clean {
+		if err := clean(); err != nil {
+			fmt.Println("Error cleaning:", err)
+			os.Exit(1)
+		}
+	} else {
+		create(args)
 	}
 }
