@@ -2,8 +2,8 @@
   {
     "modules-center": [
       "clock",
-      "battery",
       "network",
+      "battery",
     ],
     "modules-left": [
       "hyprland/workspaces"

@@ -3,7 +3,6 @@ require "visimp" {
         foldmethod = "marker"
     },
     languages = {
-        "c",
         "python",
         "latex",
         "java",

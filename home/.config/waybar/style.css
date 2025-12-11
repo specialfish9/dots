@@ -65,7 +65,6 @@ window#waybar.hidden {
 	color: #161320;
 	/*background: #FAE3B0;*/
 	background: #96CDFB;
-  border-radius: 0 20px 20px 0px;
 }
 
 #pulseaudio {
@@ -80,6 +79,7 @@ window#waybar.hidden {
 	/*background: #F8BD96;*/
 background: #B5E8E0;
 	color: #161320;
+  border-radius: 0 20px 20px 0px;
 }
 
 #battery.charging, #battery.plugged {
