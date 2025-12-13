@@ -5,6 +5,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot-%Y-%m-%d %H-%M-%S.png"
 // Startup
 spawn-at-startup "waybar"
 spawn-at-startup "dunst"
+spawn-at-startup "hypridle"
 
 spawn-sh-at-startup "foot --server"
 spawn-sh-at-startup "swaybg -i ~/Pictures/wallpaper.h2.png -m center -c 000000"
@@ -48,6 +49,7 @@ input {
         // middle-emulation
     }
 
+    disable-power-key-handling
     focus-follows-mouse max-scroll-amount="95%"
 }
 
