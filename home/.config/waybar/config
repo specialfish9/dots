@@ -6,10 +6,10 @@
       "battery",
     ],
     "modules-left": [
-      "hyprland/workspaces"
+      "niri/workspaces"
     ],
     "modules-right": [
-      "hyprland/language",
+      "niri/language",
       "tray"
     ],
     "backlight": {
@@ -44,7 +44,7 @@
       }
     },
       // Language switcher
-  "hyprland/language": {
+  "niri/language": {
     "format": " {}",
     "format-en": "US",
     "format-it": "IT"
@@ -78,9 +78,9 @@
       "interval": 15,
       "justify": "center"
     },
-    "hyprland/workspaces": {
+    "niri/workspaces": {
       "all-outputs": false,
-      "format": "{name} {icon}",
+      "format": "{index} {icon}",
       "format-icons": {
         "active": "",
         "default": "",
