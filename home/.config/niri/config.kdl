@@ -137,8 +137,8 @@ binds {
     Mod+Escape  hotkey-overlay-title="Run an Application: wofi" { spawn-sh "bash ~/.config/wofi/powermenu.sh"; }
 
     // Brightness
-    XF86MonBrightnessUp     allow-when-locked=true { spawn "~/bin/mediacontrol brightness_up # +5"; }
-    XF86MonBrightnessDown   allow-when-locked=true { spawn "~/bin/mediacontrol brightness_down # -3"; }
+    XF86MonBrightnessUp     allow-when-locked=true { spawn-sh "~/bin/mediacontrol brightness_up"; } //+5
+    XF86MonBrightnessDown   allow-when-locked=true { spawn-sh "~/bin/mediacontrol brightness_down"; } // -3
 
     // Audio volume
     XF86AudioRaiseVolume    allow-when-locked=true { spawn-sh "~/bin/mediacontrol volume_up"; }
