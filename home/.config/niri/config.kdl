@@ -10,6 +10,15 @@ spawn-at-startup "hypridle"
 spawn-sh-at-startup "foot --server"
 spawn-sh-at-startup "swaybg -i ~/Pictures/wallpaper.h2.png -m center -c 000000"
 
+environment {
+    // Set a variable like this:
+    QT_QPA_PLATFORM "wayland"
+
+    // Remove a variable by using null as the value:
+    DISPLAY ":0"
+    XDG_SESSION_TYPE "wayland"
+}
+
 input {
     keyboard {
         xkb {
