@@ -8,7 +8,8 @@ alias vi="nvim"
 alias ls="ls --color=auto"
 
 # PATH additions
-set -Ux PATH $PATH $HOME/.local/bin $HOME/bin
+fish_add_path ~/bin
+fish_add_path ~/.local/bin
 
 # Prompt
 function fish_prompt
@@ -37,6 +38,22 @@ function fish_prompt
 
     set_color normal
 end
+
+# Custom binding
+function bind_bang
+    switch (commandline -t)[-1]
+        case "!"
+            commandline -t -- $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
+end
+
+function fish_user_key_bindings
+    bind ! bind_bang
+end
+
 
 # Disable default greeting
 set fish_greeting 
