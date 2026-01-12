@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
+	"regexp"
 	"strings"
 )
 
-func readIgnoreFile(file string) ([]string, error) {
+func readIgnoreFile(file string) ([]*regexp.Regexp, error) {
 	b, err := os.ReadFile(file)
 	if os.IsNotExist(err) {
 		// If the file doesnt exists then return empty slice
@@ -19,20 +19,20 @@ func readIgnoreFile(file string) ([]string, error) {
 
 	lines := strings.Split(string(b), "\n")
 
-	absLines := make([]string, 0)
+	absLines := make([]*regexp.Regexp, 0)
 
 	for i := range len(lines) {
 		if lines[i] == "" {
 			continue
 		}
-		abs, err := filepath.Abs(lines[i])
+		debug("Ignoring %s", lines[i])
+
+		r, err := regexp.Compile(lines[i])
 		if err != nil {
-			return nil, fmt.Errorf("parsing ignore file: invalid line `%s`", abs)
+			return nil, fmt.Errorf("parsing ignore file: invalid regex `%s`", lines[i])
 		}
 
-		debug("ignoring folder %s", abs)
-
-		absLines = append(absLines, abs)
+		absLines = append(absLines, r)
 	}
 
 	return absLines, nil

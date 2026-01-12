@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 )
 
 const lockFile = "shadow.lock"
@@ -37,18 +36,13 @@ func parseArgs() (*args, error) {
 		return nil, errors.New("missing base path argument")
 	}
 
-	absPath, err := filepath.Abs(os.Args[1])
-	if err != nil {
-		return nil, fmt.Errorf("invalid absolute path: %w", err)
-	}
-
 	ignoreFileArg := ignoreFile
 	if len(os.Args) > 3 {
 		ignoreFileArg = os.Args[3]
 	}
 
 	return &args{
-		base:       absPath,
+		base:       os.Args[1],
 		out:        os.Args[2],
 		debug:      os.Getenv("DEBUG") == "1",
 		ignoreFile: ignoreFileArg,

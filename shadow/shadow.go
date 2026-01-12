@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
@@ -36,7 +37,7 @@ func (t *treeNode) string(level int) string {
 	return out
 }
 
-func mkTree(root string, name string, ignore []string) (*treeNode, error) {
+func mkTree(root string, name string, ignore []*regexp.Regexp) (*treeNode, error) {
 	entries, err := os.ReadDir(root)
 	if err != nil {
 		return nil, fmt.Errorf("reading directory %s: %w", root, err)
@@ -47,16 +48,17 @@ func mkTree(root string, name string, ignore []string) (*treeNode, error) {
 		if e.IsDir() {
 			path := filepath.Join(root, e.Name())
 
+			// Check if directory is ignored
 			skip := false
-			for _, ignored := range ignore {
-				if strings.HasPrefix(path, ignored) {
-					fmt.Println("aa", "pah", path, "ignored", ignored)
+			for _, r := range ignore {
+				debug("Checking ignore pattern %s against %s", r.String(), path)
+				if r.MatchString(path) {
+					debug("Ignoring directory %s", path)
 					skip = true
 				}
 			}
 
 			if skip {
-				debug("ignoring dir %s", path)
 				continue
 			}
 
