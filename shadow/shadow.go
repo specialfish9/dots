@@ -36,26 +36,45 @@ func (t *treeNode) string(level int) string {
 	return out
 }
 
-func mkTree(root string, name string) (*treeNode, error) {
+func mkTree(root string, name string, ignore []string) (*treeNode, error) {
 	entries, err := os.ReadDir(root)
 	if err != nil {
 		return nil, fmt.Errorf("reading directory %s: %w", root, err)
 	}
 
-	children := make([]*treeNode, len(entries))
-	for i, e := range entries {
+	children := make([]*treeNode, 0, len(entries))
+	for _, e := range entries {
 		if e.IsDir() {
-			children[i], err = mkTree(filepath.Join(root, e.Name()), e.Name())
+			path := filepath.Join(root, e.Name())
+
+			skip := false
+			for _, ignored := range ignore {
+				if strings.HasPrefix(path, ignored) {
+					fmt.Println("aa", "pah", path, "ignored", ignored)
+					skip = true
+				}
+			}
+
+			if skip {
+				debug("ignoring dir %s", path)
+				continue
+			}
+
+			node, err := mkTree(path, e.Name(), ignore)
 			if err != nil {
 				return nil, err
 			}
+
+			children = append(children, node)
 		} else {
 			// Add file to tree
-			children[i] = &treeNode{
+			node := &treeNode{
 				path:   filepath.Join(root, e.Name()),
 				name:   e.Name(),
 				isFile: true,
 			}
+
+			children = append(children, node)
 		}
 	}
 

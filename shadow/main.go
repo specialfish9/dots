@@ -9,12 +9,14 @@ import (
 )
 
 const lockFile = "shadow.lock"
+const ignoreFile = ".shadowignore"
 
 type args struct {
-	base  string
-	out   string
-	clean bool
-	debug bool
+	base       string
+	out        string
+	clean      bool
+	debug      bool
+	ignoreFile string
 }
 
 // parseArgs parses args in a cumbersome, manual way. For now it works fairly
@@ -40,10 +42,16 @@ func parseArgs() (*args, error) {
 		return nil, fmt.Errorf("invalid absolute path: %w", err)
 	}
 
+	ignoreFileArg := ignoreFile
+	if len(os.Args) > 3 {
+		ignoreFileArg = os.Args[3]
+	}
+
 	return &args{
-		base:  absPath,
-		out:   os.Args[2],
-		debug: os.Getenv("DEBUG") == "1",
+		base:       absPath,
+		out:        os.Args[2],
+		debug:      os.Getenv("DEBUG") == "1",
+		ignoreFile: ignoreFileArg,
 	}, nil
 }
 
@@ -75,9 +83,16 @@ func debug(format string, args ...any) {
 }
 
 func create(args *args) {
+	debug("Reading ignore file: %s", args.ignoreFile)
+	ignore, err := readIgnoreFile(args.ignoreFile)
+	if err != nil {
+		fmt.Println("Error reading ignore file:", err)
+		os.Exit(1)
+	}
+
 	debug("Reading folder: %s", args.base)
 
-	tree, err := mkTree(args.base, "")
+	tree, err := mkTree(args.base, "", ignore)
 	if err != nil {
 		fmt.Println("Error creating tree:", err)
 		os.Exit(1)

@@ -1,0 +1,12 @@
+./home/bin
+./home/.fonts
+./home/.config/battery_alert
+./home/.config/dunst
+./home/.config/eww
+./home/.config/foot
+./home/.config/hypr
+./home/.config/ly
+./home/.config/niri
+./home/.config/waybar
+./home/.config/wofi
+./home/.config/zed
