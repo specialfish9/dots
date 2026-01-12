@@ -143,6 +143,11 @@ binds {
     XF86AudioMicMute        allow-when-locked=true { spawn-sh "~/bin/mediacontrol mic_mute"; }
 
     // Media
+    XF86AudioPlay           allow-when-locked=true { spawn-sh "~/bin/mediacontrol play_pause"; }
+    XF86AudioPrev           allow-when-locked=true { spawn-sh "~/bin/mediacontrol prev"; }
+    XF86AudioNext           allow-when-locked=true { spawn-sh "~/bin/mediacontrol next"; }
+
+    // Media alternative keys for my Thinkpad <3
     XF86NotificationCenter  allow-when-locked=true { spawn-sh "~/bin/mediacontrol play_pause"; }
     XF86PickupPhone         allow-when-locked=true { spawn-sh "~/bin/mediacontrol prev"; }
     XF86HangupPhone         allow-when-locked=true { spawn-sh "~/bin/mediacontrol next"; }
