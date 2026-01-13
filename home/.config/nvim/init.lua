@@ -27,13 +27,20 @@ require "visimp" {
         }
     },
     theme = {
+        lualine = 'miasma',
+        package = "specialfish9/oxeo-nvim",
+        colorscheme = "miasma",
+        background = "dark"
+
+        -- My ex theme
+        -- package = "bluz71/vim-moonfly-colors",
+        -- colorscheme = "moonfly",
+        -- background = "dark"
+        
+        -- My ex-ex-theme 
         -- package = 'bluz71/vim-nightfly-guicolors',
         -- colorscheme = 'nightfly',
         -- background = 'dark',
-        -- lualine = 'nightfly',
-        package = "bluz71/vim-moonfly-colors",
-        colorscheme = "moonfly",
-        background = "dark"
     },
     autopairs = {},
     blankline = {
