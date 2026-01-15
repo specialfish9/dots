@@ -1,19 +1,38 @@
+@define-color background #222222;
+@define-color foreground #c2c2b0;
+@define-color black #222222;
+@define-color red #685742;
+@define-color green #5f875f;
+@define-color bright_cyan #b36d43;
+@define-color blue #78824b;
+@define-color magenta #bb7744;
+@define-color cyan #c9a554;
+@define-color white #d7c483;
+@define-color bright_black #666666;
+@define-color bright_red #685742;
+@define-color bright_green #5f875f;
+@define-color bright_bright_cyan #b36d43;
+@define-color bright_blue #78824b;
+@define-color bright_magenta #bb7744;
+@define-color bright_cyan #c9a554;
+@define-color bright_white #d7c483;
+
 window {
-  background-color: #2d2329;
+  background-color: @background;
   color: white;
-  border: 2px solid #bd93f9;
+  border: 2px solid @bright_green;
 }
 
 #input {
   margin: 20px;
-  border: 2px solid #bd93f9;
-  background-color: #222222; 
+  border: 2px solid @bright_green;
+  background-color: @background; 
   color: white;
 }
 
 #inner-box {
   margin: 20px;
-  background-color: #2d2329;
+  background-color: @background;
   color: white;
 }
 
@@ -24,7 +43,7 @@ window {
 }
 
 #entry:selected{
-  border: 2px solid #bd93f9;
+  border: 2px solid @bright_green;
   background-color: transparent;
   border-radius: 4px;
 }
