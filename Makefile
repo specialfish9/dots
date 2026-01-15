@@ -11,15 +11,13 @@ install-shadow:
 .PHONY: install-shadow
 
 copy:
-	UNAME_S := $(shell uname -s)
-	IGNORE := ""
-	ifeq ($(UNAME_S),Linux)
-		IGNORE = ".shadowignore"
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		IGNORE = "macos.shadowignore"
-	endif
-	$(SHADOW_PATH) $(CONFIG_DIR) $(TARGET_DIR) $(IGNORE)
+	@IGNORE=""; \
+	if [ "$$(uname -s)" = "Linux" ]; then \
+		IGNORE=".shadowignore"; \
+	elif [ "$$(uname -s)" = "Darwin" ]; then \
+		IGNORE="macos.shadowignore"; \
+	fi; \
+	$(SHADOW_PATH) $(CONFIG_DIR) $(TARGET_DIR) "$$IGNORE"
 .PHONY: copy
 
 uninstall: uninstall-shadow
