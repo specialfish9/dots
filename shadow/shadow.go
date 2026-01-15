@@ -69,9 +69,15 @@ func mkTree(root string, name string, ignore []*regexp.Regexp) (*treeNode, error
 
 			children = append(children, node)
 		} else {
+			relPath := filepath.Join(root, e.Name())
+			absPath, err := filepath.Abs(relPath)
+			if err != nil {
+				return nil, fmt.Errorf("invalid absolute path: %w", err)
+			}
+
 			// Add file to tree
 			node := &treeNode{
-				path:   filepath.Join(root, e.Name()),
+				path:   absPath,
 				name:   e.Name(),
 				isFile: true,
 			}
