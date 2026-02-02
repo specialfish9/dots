@@ -17,6 +17,8 @@ environment {
     // Remove a variable by using null as the value:
     DISPLAY ":0"
     XDG_SESSION_TYPE "wayland"
+
+    EDITOR "nvim"
 }
 
 input {
@@ -59,9 +61,10 @@ layout {
     center-focused-column "never"
 
     preset-column-widths {
-        proportion 0.33333
+        proportion 1.0
         proportion 0.5
-        proportion 0.66667
+        // proportion 0.33333
+        // proportion 0.66667
     }
 
     default-column-width {

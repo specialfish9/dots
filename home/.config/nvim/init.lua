@@ -120,7 +120,7 @@ require "visimp" {
     binds = {
         [{mode = "n", bind = "<C-P>"}] = ":bprev<cr>",
         [{mode = "n", bind = "<C-N>"}] = ":bnext<cr>",
-        [{mode = "n", bind = "<C-T>"}] = ":NvimTreeToggle<cr>",
+        [{mode = "n", bind = "<C-Y>"}] = ":NvimTreeToggle<cr>",
         [{mode = "n", bind = "<C-Q>"}] = ":quit<cr>"
     }
 }

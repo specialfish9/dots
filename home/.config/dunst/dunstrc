@@ -8,9 +8,6 @@
     scale = 0
     notification_limit = 10
     
-    frame_color = "#3c4549"
-    separator_color = "#3c4549"
-
     progress_bar = true
     progress_bar_height = 20
     progress_bar_frame_width = 1
@@ -24,15 +21,14 @@
     padding = 16
     horizontal_padding = 16
     text_icon_padding = 8
-    frame_width = 0
+    frame_width = 2
     separator_color = frame
     sort = yes
     
     font = M+1NerdFont
     line_height = 0
     markup = full
-    #format = "<b>%s</b>\n%b"
-    format = "<span><b>%s</b></span>%b"
+    format = "<span><b>%s</b></span> %b"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -59,7 +55,7 @@
     title = Dunst
     class = Dunst
     
-    corner_radius = 8
+    corner_radius = 2
     ignore_dbusclose = false
     
     force_xwayland = false
@@ -73,26 +69,26 @@
     per_monitor_dpi = false
 
 [urgency_low]
-    foreground = "#2d2d2d"
-    background = "#ffffff"
-    highlight = "#555555"
-    frame_color = "#404040"
+    foreground = "#d7c483"
+    background = "#222222"
+    highlight = "#c9a554"
+    frame_color = "#5f875f"
     timeout = 5
     icon = dialog-information
 
 [urgency_normal]
-    foreground = "#2d2d2d"
-    background = "#ffffff"
-    highlight = "#4a90e2"
-    frame_color = "#404040"
+    foreground = "#d7c483"
+    background = "#222222"
+    highlight = "#c9a554"
+    frame_color = "#78824b"
     timeout = 10
     icon = dialog-information
 
 [urgency_critical]
-    background = "#962121"
-    foreground = "#ffffff"
-    highlight = "#e74c3c"
-    frame_color = "#8b4242"
+    foreground = "#d7c483"
+    background = "#222222"
+    highlight = "#c9a554"
+    frame_color = "#685742"
     timeout = 0
     icon = dialog-error
 
