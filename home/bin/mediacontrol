@@ -5,7 +5,8 @@
 # See README.md for usage instructions
 volume_step=5
 mic_volume_step=5
-brightness_step=5
+brightness_step_inc=5
+brightness_step_dec=3
 max_volume=100
 mic_max_volume=100
 notification_timeout=1000 # in milliseconds
@@ -174,13 +175,13 @@ case $1 in
     # Brightness =========================================================
     brightness_up)
     # Increases brightness and displays the notification
-    brightnessctl s +$brightness_step%
+    brightnessctl s +$brightness_step_inc%
     show_brightness_notif
     ;;
 
     brightness_down)
     # Decreases brightness and displays the notification
-    brightnessctl s $brightness_step%-
+    brightnessctl s $brightness_step_dec%-
     show_brightness_notif
     ;;
 

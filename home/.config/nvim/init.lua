@@ -11,6 +11,7 @@ require "visimp" {
         "typst",
         "rust"
     },
+    copilot = {},
     python = {
         lsp = "pyright" -- Avoid installing pyright, use the system's default
     },

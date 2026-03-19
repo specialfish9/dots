@@ -10,6 +10,7 @@ alias ls="ls --color=auto"
 # PATH additions
 fish_add_path ~/bin
 fish_add_path ~/.local/bin
+fish_add_path ~/.npm/bin
 
 # Prompt
 function fish_prompt

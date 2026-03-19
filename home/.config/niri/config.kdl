@@ -21,6 +21,10 @@ environment {
     EDITOR "nvim"
 }
 
+xwayland-satellite {
+    path "xwayland-satellite"
+}
+
 input {
     keyboard {
         xkb {
