@@ -64,6 +64,13 @@ window#waybar.hidden {
 	background: @blue;
 }
 
+#custom-tailscale {
+	transition: none;
+	color: @black;
+	background: @blue;
+}
+
+
 #battery {
 	transition: none;
   background: @cyan;

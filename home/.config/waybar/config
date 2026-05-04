@@ -3,6 +3,7 @@
     "modules-center": [
       "clock",
       "network",
+      "custom/tailscale",
       "battery",
     ],
     "modules-left": [
@@ -129,6 +130,11 @@
     "tray": {
       "icon-size": 18,
       "spacing": 10
+    },
+    "custom/tailscale": {
+      "interval": 1,
+      "exec": "~/.config/waybar/scripts/tailscale.sh",
+      "format": "{}"
     }
-  }
+    }
 ]
