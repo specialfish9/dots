@@ -14,15 +14,20 @@ fish_add_path ~/.npm/bin
 
 # Prompt
 function fish_prompt
-    # Colors converted to closest fish equivalents
-    set_color blue
-    printf "%s" (whoami)
+    # Custom prompt if inside distrobox
+    if set -q CONTAINER_ID
+      set_color bryellow
+      printf "%s" $CONTAINER_ID
+    else
+      set_color blue
+      printf "%s" (whoami)
 
-    set_color brgreen --bold
-    printf " at "
+      set_color brgreen --bold
+      printf " at "
 
-    set_color brcyan
-    printf "%s" (hostname)
+      set_color brcyan
+      printf "%s" (hostname)
+    end
 
     set_color brgreen --bold
     printf " in "
